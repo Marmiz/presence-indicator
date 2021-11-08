@@ -9,10 +9,16 @@ export type ActiveUser = {
   activeOn: string;
 };
 
+export type Visibility = {
+  [key: string]: boolean;
+};
+
 /**
  * step 0. - have a list of ref to the element we need to watch
  * step 1. - determine what is in view
  * step 2. - add avatar to element in view
+ * step 3. - add "parked" avatar
+ * step 4. - animate
  */
 
 const list = ["batman", "superman", "ironman", "drstrange"];
@@ -27,8 +33,7 @@ function App() {
     () => list.map(() => React.createRef<HTMLDivElement>()),
     []
   );
-  const [visible, setVisible] = React.useState({});
-
+  const [visible, setVisible] = React.useState<Visibility>({});
   const visibilityCb = React.useCallback(
     (name, visibility) => {
       setVisible((prevState) => ({
@@ -78,7 +83,7 @@ function App() {
       />
       <div style={{ height: "300vh" }} />
       <div data-id="presence-parking">
-        <Presence activeUsers={users} />
+        <Presence activeUsers={users} visibilityList={visible} />
       </div>
     </div>
   );

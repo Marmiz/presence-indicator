@@ -6,6 +6,7 @@ import Textarea from "./components/Textarea";
 import Input from "./components/Input";
 import { ActiveUser } from "./App";
 import useOnScreen from "./hooks/useOnScreen";
+import Avatar from "./components/Avatar";
 
 export enum Variants {
   Textarea,
@@ -48,7 +49,9 @@ const PageElement = ({
       >
         <Heading>{heading}</Heading>
         {isVisible
-          ? activeUsers.filter((u) => u.activeOn === id).map((el) => el.id)
+          ? activeUsers
+              .filter((u) => u.activeOn === id)
+              .map((el) => <Avatar key={el.id} name={el.id} />)
           : null}
       </div>
       <Text>{text}</Text>
