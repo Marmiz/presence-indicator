@@ -1,0 +1,9 @@
+.Box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.25rem 1.75rem;
+  min-height: 33vh;
+  max-width: 1080px;
+}
