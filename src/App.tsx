@@ -1,4 +1,5 @@
 import React from "react";
+import { AnimateSharedLayout } from "framer-motion";
 import PageElement, { Variants } from "./PageElement";
 import Presence from "./Presence";
 import { POSITIONING } from "./hooks/useOnScreen";
@@ -23,8 +24,8 @@ export type Visibility = {
 
 const list = ["batman", "superman", "ironman", "drstrange"];
 const users: ActiveUser[] = [
-  { id: "NN", activeOn: "drstrange" },
-  { id: "ZZ", activeOn: "batman" },
+  { id: "NN", activeOn: "superman" },
+  { id: "ZZ", activeOn: "ironman" },
   { id: "BB", activeOn: "batman" },
 ];
 function App() {
@@ -47,56 +48,54 @@ function App() {
   // We need a way to tell what element is in view.
   return (
     <div className="App">
-      <div data-id="presence-parking-top">
+      <AnimateSharedLayout>
         <Presence
           activeUsers={users}
           visibilityList={visible}
           position={POSITIONING.TOP}
         />
-      </div>
-      <PageElement
-        heading="Title"
-        text="What's the document called"
-        divRef={listRefs[0]}
-        id={list[0]}
-        activeUsers={users}
-        onVisibilityChange={visibilityCb}
-      />
-      <PageElement
-        heading="Date"
-        text="When doest the event happen"
-        divRef={listRefs[1]}
-        id={list[1]}
-        activeUsers={users}
-        onVisibilityChange={visibilityCb}
-      />
-      <PageElement
-        heading="Description"
-        text="Lorem ipsum dolor sit amet"
-        variants={Variants.Textarea}
-        divRef={listRefs[2]}
-        id={list[2]}
-        activeUsers={users}
-        onVisibilityChange={visibilityCb}
-      />
-      <div style={{ height: "300vh" }} />
-      <PageElement
-        heading="Consectetur"
-        text="Lorem ipsum dolor sit amet"
-        variants={Variants.Textarea}
-        divRef={listRefs[3]}
-        id={list[3]}
-        activeUsers={users}
-        onVisibilityChange={visibilityCb}
-      />
-      <div style={{ height: "300vh" }} />
-      <div data-id="presence-parking-bottom">
         <Presence
           activeUsers={users}
           visibilityList={visible}
           position={POSITIONING.BOTTOM}
         />
-      </div>
+        <PageElement
+          heading="Title"
+          text="What's the document called"
+          divRef={listRefs[0]}
+          id={list[0]}
+          activeUsers={users}
+          onVisibilityChange={visibilityCb}
+        />
+        <PageElement
+          heading="Date"
+          text="When doest the event happen"
+          divRef={listRefs[1]}
+          id={list[1]}
+          activeUsers={users}
+          onVisibilityChange={visibilityCb}
+        />
+        <div style={{ height: "300vh" }}>scroll for more content</div>
+        <PageElement
+          heading="Description"
+          text="Lorem ipsum dolor sit amet"
+          variants={Variants.Textarea}
+          divRef={listRefs[2]}
+          id={list[2]}
+          activeUsers={users}
+          onVisibilityChange={visibilityCb}
+        />
+        <PageElement
+          heading="Consectetur"
+          text="Lorem ipsum dolor sit amet"
+          variants={Variants.Textarea}
+          divRef={listRefs[3]}
+          id={list[3]}
+          activeUsers={users}
+          onVisibilityChange={visibilityCb}
+        />
+        <div style={{ height: "300vh" }}>scroll for more content</div>
+      </AnimateSharedLayout>
     </div>
   );
 }

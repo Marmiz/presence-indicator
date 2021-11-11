@@ -5,7 +5,7 @@ import Text from "./components/Text";
 import Textarea from "./components/Textarea";
 import Input from "./components/Input";
 import { ActiveUser } from "./App";
-import useOnScreen from "./hooks/useOnScreen";
+import useOnScreen, { POSITIONING } from "./hooks/useOnScreen";
 import Avatar from "./components/Avatar";
 
 export enum Variants {
@@ -48,7 +48,7 @@ const PageElement = ({
         }}
       >
         <Heading>{heading}</Heading>
-        {isVisible
+        {isVisible === POSITIONING.VISIBLE
           ? activeUsers
               .filter((u) => u.activeOn === id)
               .map((el) => <Avatar key={el.id} name={el.id} />)
