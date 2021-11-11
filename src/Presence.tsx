@@ -1,16 +1,18 @@
 import React from "react";
 import { ActiveUser, Visibility } from "./App";
 import Avatar from "./components/Avatar";
+import { POSITIONING } from "./hooks/useOnScreen";
 import "./Presence.css";
 
 type Props = {
   activeUsers: ActiveUser[];
   visibilityList: Visibility;
+  position: POSITIONING;
 };
 
-const Presence = ({ activeUsers, visibilityList }: Props) => {
+const Presence = ({ activeUsers, visibilityList, position: type }: Props) => {
   const offScreen = Object.entries(visibilityList).reduce<string[]>(
-    (acc, [k, v]) => (!v ? [...acc, k] : [...acc]),
+    (acc, [k, v]) => (v === type ? [...acc, k] : [...acc]),
     []
   );
 
@@ -19,7 +21,11 @@ const Presence = ({ activeUsers, visibilityList }: Props) => {
   );
 
   return (
-    <div className="Presence">
+    <div
+      className={`Presence ${
+        type === POSITIONING.TOP ? "PresenceTop" : "PresenceBottom"
+      }`}
+    >
       {offscreenUsers.map((u) => (
         <Avatar key={u.id} name={u.id} />
       ))}

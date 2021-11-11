@@ -1,7 +1,7 @@
-import React, { createRef } from "react";
+import React from "react";
 import PageElement, { Variants } from "./PageElement";
 import Presence from "./Presence";
-import useOnScreen from "./hooks/useOnScreen";
+import { POSITIONING } from "./hooks/useOnScreen";
 import "./App.css";
 
 export type ActiveUser = {
@@ -10,7 +10,7 @@ export type ActiveUser = {
 };
 
 export type Visibility = {
-  [key: string]: boolean;
+  [key: string]: POSITIONING;
 };
 
 /**
@@ -47,6 +47,13 @@ function App() {
   // We need a way to tell what element is in view.
   return (
     <div className="App">
+      <div data-id="presence-parking-top">
+        <Presence
+          activeUsers={users}
+          visibilityList={visible}
+          position={POSITIONING.TOP}
+        />
+      </div>
       <PageElement
         heading="Title"
         text="What's the document called"
@@ -72,6 +79,7 @@ function App() {
         activeUsers={users}
         onVisibilityChange={visibilityCb}
       />
+      <div style={{ height: "300vh" }} />
       <PageElement
         heading="Consectetur"
         text="Lorem ipsum dolor sit amet"
@@ -82,8 +90,12 @@ function App() {
         onVisibilityChange={visibilityCb}
       />
       <div style={{ height: "300vh" }} />
-      <div data-id="presence-parking">
-        <Presence activeUsers={users} visibilityList={visible} />
+      <div data-id="presence-parking-bottom">
+        <Presence
+          activeUsers={users}
+          visibilityList={visible}
+          position={POSITIONING.BOTTOM}
+        />
       </div>
     </div>
   );

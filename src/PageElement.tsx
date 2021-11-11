@@ -35,7 +35,7 @@ const PageElement = ({
 
   useEffect(() => {
     onVisibilityChange(id, isVisible);
-  }, [id, isVisible]);
+  }, [id, isVisible, onVisibilityChange]);
 
   return (
     <Box ref={divRef} id={id}>

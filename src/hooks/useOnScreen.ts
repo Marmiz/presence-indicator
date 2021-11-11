@@ -1,22 +1,32 @@
-import React, { RefObject, useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 
-type Visibilty = [string, boolean];
+export enum POSITIONING {
+  TOP,
+  BOTTOM,
+  VISIBLE,
+}
 
 export default function useOnScreen<T extends Element>(
   ref: RefObject<T>,
   rootMargin: string = "0px"
-): boolean {
+): POSITIONING {
   // State and setter for storing whether element is visible
-  const [isIntersecting, setIntersecting] = useState<boolean>(false);
+  const [isIntersecting, setIntersecting] = useState<POSITIONING>(
+    POSITIONING.BOTTOM
+  );
   useEffect(() => {
     const r = ref.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // const name = entry.target.getAttribute("data-id") || "";
-        // const visible = entry.isIntersecting;
-        // console.log(name, visible);
         // Update our state when observer callback fires
-        setIntersecting(entry.isIntersecting);
+        // If not visible notify TOP or BOTTOM based on y axis position
+        if (entry.isIntersecting) {
+          setIntersecting(POSITIONING.VISIBLE);
+          return;
+        }
+        const { y } = entry.boundingClientRect;
+        const pos = y > 0 ? POSITIONING.BOTTOM : POSITIONING.TOP;
+        setIntersecting(pos);
       },
       {
         rootMargin,
