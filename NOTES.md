@@ -3,13 +3,15 @@ This is a non-exaustive list of thought of what to me the Presence Indicators me
 ## Requirements
 
 - at the bottom of the page I see a list of avatars that are working on element not in view
+- at the top of the page I see a list of avatars that are working on element not in view
 - I see next the element the avatar(s) of people focusing on it
 - Smooth transition/animation
 
 This means solving two points:
 
-1. Determine how/what is in view. _possible solution_: scrollEvent + getBoundingClientRect()
+1. Determine how/what is in view. _possible solution_: scrollEvent + getBoundingClientRect() | IntersectionObserver API
 2. onFocus() event to update where a user is.
+3. websocket for live updates.
 
 ### Questions:
 
@@ -19,6 +21,6 @@ This means solving two points:
 
 ### Solutions:
 
-- getBoundingClientRect()
+- IntersectionObserver()
 - useRef()
 - FramerMotion?
