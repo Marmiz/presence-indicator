@@ -51,7 +51,9 @@ const PageElement = ({
         {isVisible === POSITIONING.VISIBLE
           ? activeUsers
               .filter((u) => u.activeOn === id)
-              .map((el) => <Avatar key={el.id} name={el.id} />)
+              .map((el) => (
+                <Avatar key={el.id} name={el.id} position={isVisible} />
+              ))
           : null}
       </div>
       <Text>{text}</Text>

@@ -27,7 +27,7 @@ const Presence = ({ activeUsers, visibilityList, position: type }: Props) => {
       }`}
     >
       {offscreenUsers.map((u) => (
-        <Avatar key={u.id} name={u.id} />
+        <Avatar key={u.id} name={u.id} position={type} />
       ))}
     </div>
   );
